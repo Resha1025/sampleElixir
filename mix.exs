@@ -57,6 +57,7 @@ defmodule SampleElixir.MixProject do
       {:gettext, "~> 0.20"},
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
+      {:pbkdf2_elixir, "~> 2.2.0"},
       {:bandit, "~> 1.2"}
     ]
   end
