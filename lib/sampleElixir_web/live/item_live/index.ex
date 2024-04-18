@@ -6,6 +6,8 @@ defmodule SampleElixirWeb.ItemLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
+    if connected?(socket), do: Items.subscibe()
+
     {:ok, stream(socket, :items, Items.list_items())}
   end
 
@@ -35,6 +37,12 @@ defmodule SampleElixirWeb.ItemLive.Index do
   @impl true
   def handle_info({SampleElixirWeb.ItemLive.FormComponent, {:saved, item}}, socket) do
     {:noreply, stream_insert(socket, :items, item)}
+  end
+
+  @impl true
+  def handle_info({:item_created, item}, socket) do
+    {:noreply, update(socket, :items, fn items -> [item | items] end)}
+
   end
 
   @impl true

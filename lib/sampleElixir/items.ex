@@ -53,6 +53,7 @@ defmodule SampleElixir.Items do
     %Item{}
     |> Item.changeset(attrs)
     |> Repo.insert()
+    |> broadcast(:item_created)
   end
 
   @doc """
@@ -71,6 +72,7 @@ defmodule SampleElixir.Items do
     item
     |> Item.changeset(attrs)
     |> Repo.update()
+    |> broadcast(:item_updated)
   end
 
   @doc """
@@ -100,5 +102,15 @@ defmodule SampleElixir.Items do
   """
   def change_item(%Item{} = item, attrs \\ %{}) do
     Item.changeset(item, attrs)
+  end
+
+  def subscibe do
+    Phoenix.PubSub.subscribe(SampleElixir.PubSub, "items")
+  end
+
+  defp broadcast({:error, _reason} = error, _event), do: error
+  defp broadcast({:ok, item}, event) do
+    Phoenix.PubSub.broadcast(SampleElixir.PubSub, "items", {event, item})
+    {:ok, item}
   end
 end
