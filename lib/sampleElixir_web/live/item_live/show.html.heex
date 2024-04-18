@@ -1,6 +1,5 @@
 <.header>
   Item <%= @item.id %>
-  <:subtitle>This is a item record from your database.</:subtitle>
   <:actions>
     <.link patch={~p"/items/#{@item}/show/edit"} phx-click={JS.push_focus()}>
       <.button>Edit item</.button>
@@ -9,9 +8,9 @@
 </.header>
 
 <.list>
-  <:item title="Item code"><%= @item.item_code %></:item>
-  <:item title="Item name"><%= @item.item_name %></:item>
-  <:item title="Item description"><%= @item.item_description %></:item>
+  <:item title="Code"><%= @item.item_code %></:item>
+  <:item title="Name"><%= @item.item_name %></:item>
+  <:item title="Description"><%= @item.item_description %></:item>
   <:item title="Price"><%= @item.price %></:item>
 </.list>
 

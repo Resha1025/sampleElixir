@@ -15,6 +15,6 @@ defmodule SampleElixir.Items.Item do
   def changeset(item, attrs) do
     item
     |> cast(attrs, [:item_code, :item_name, :item_description, :price])
-    |> validate_required([:item_code, :item_name, :item_description, :price])
+    |> validate_required([:item_code, :item_name, :price])
   end
 end

@@ -9,7 +9,6 @@ defmodule SampleElixirWeb.ItemLive.FormComponent do
     <div>
       <.header>
         <%= @title %>
-        <:subtitle>Use this form to manage item records in your database.</:subtitle>
       </.header>
 
       <.simple_form
@@ -19,12 +18,12 @@ defmodule SampleElixirWeb.ItemLive.FormComponent do
         phx-change="validate"
         phx-submit="save"
       >
-        <.input field={@form[:item_code]} type="text" label="Item code" />
-        <.input field={@form[:item_name]} type="text" label="Item name" />
-        <.input field={@form[:item_description]} type="text" label="Item description" />
+        <.input field={@form[:item_code]} type="text" label="Code" />
+        <.input field={@form[:item_name]} type="text" label="Name" />
+        <.input field={@form[:item_description]} type="text" label="Description" />
         <.input field={@form[:price]} type="number" label="Price" step="any" />
         <:actions>
-          <.button phx-disable-with="Saving...">Save Item</.button>
+          <.button phx-disable-with="Saving...">Save</.button>
         </:actions>
       </.simple_form>
     </div>
