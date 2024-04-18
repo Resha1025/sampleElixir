@@ -18,7 +18,7 @@ defmodule SampleElixir.Items do
 
   """
   def list_items do
-    Repo.all(Item)
+    Repo.all(from i in Item, order_by: [desc: i.id])
   end
 
   @doc """
@@ -88,7 +88,9 @@ defmodule SampleElixir.Items do
 
   """
   def delete_item(%Item{} = item) do
-    Repo.delete(item)
+    item
+    |> Repo.delete()
+    |> broadcast(:item_deleted)
   end
 
   @doc """

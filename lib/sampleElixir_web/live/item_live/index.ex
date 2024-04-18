@@ -45,6 +45,16 @@ defmodule SampleElixirWeb.ItemLive.Index do
 
   end
 
+  def handle_info({:item_updated, item}, socket) do
+    {:noreply, update(socket, :items, fn items -> [item | items] end)}
+
+  end
+
+  def handle_info({:item_deleted, item}, socket) do
+    {:noreply, update(socket, :items, fn items -> [item | items] end)}
+
+  end
+
   @impl true
   def handle_event("delete", %{"id" => id}, socket) do
     item = Items.get_item!(id)
